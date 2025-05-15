@@ -2,6 +2,12 @@ import discord
 import requests
 import json
 import random as ran
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+token = os.getenv("DISCORD_TOKEN")
 
 
 def get_meme():
@@ -9,7 +15,6 @@ def get_meme():
     json_data = json.loads(response.text)
     contents = [item["content"] for item in json_data["results"]]
     quote = ran.choice(contents)
-    print(quote)
     return quote
 
 
@@ -30,6 +35,4 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run(
-    "MTM3MjQ5MDQ0NjA1OTYwNjA5Ng.GAFEtO.eoKqfNLnue7WmYDJx5jSoQ1sLN1w_Ih02z1b8c"
-)  # Replace with your own token.
+client.run(token)  # Replace with your own token.
